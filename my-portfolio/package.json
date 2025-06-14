@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist -u \"github-actions-bot <support+actions@github.com>\" -r https://$GH_TOKEN@github.com/TheCoder30ec4/Portfolio_website.git"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

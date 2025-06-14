@@ -3,7 +3,7 @@ name: Deploy Vite Portfolio to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -26,13 +26,9 @@ jobs:
         run: npm run build
         working-directory: ./my-portfolio
 
-      - name: Configure Git user
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Deploy to GitHub Pages
-        run: npm run deploy
-        working-directory: ./my-portfolio
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx gh-pages -d dist -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -r https://$GH_TOKEN@github.com/TheCoder30ec4/Portfolio_website.git
+        working-directory: ./my-portfolio
