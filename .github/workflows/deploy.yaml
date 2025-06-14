@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: my-portfolio
+
+      - name: Build site
+        run: npm run build
+        working-directory: my-portfolio
+
+      - name: Deploy to GitHub Pages
+        run: |
+          npm install -g gh-pages
+          npm run deploy
+        working-directory: my-portfolio
