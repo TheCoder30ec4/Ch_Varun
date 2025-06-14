@@ -1,15 +1,16 @@
-name: Deploy to GitHub Pages
+name: Deploy Vite Portfolio to GitHub Pages
 
 on:
   push:
     branches:
-      - main  
+      - main  # Change if your default branch is not 'main'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -21,15 +22,14 @@ jobs:
         run: npm install
         working-directory: ./my-portfolio
 
-      - name: Build project
+      - name: Build the project
         run: npm run build
         working-directory: ./my-portfolio
 
-      - name: Configure Git
+      - name: Configure Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        working-directory: ./my-portfolio
 
       - name: Deploy to GitHub Pages
         run: npm run deploy
