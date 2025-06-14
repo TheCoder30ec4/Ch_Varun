@@ -30,5 +30,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx gh-pages -d dist -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -r https://$GH_TOKEN@github.com/TheCoder30ec4/Portfolio_website.git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npx gh-pages -d dist -r https://$GH_TOKEN@github.com/TheCoder30ec4/Portfolio_website.git
         working-directory: ./my-portfolio
