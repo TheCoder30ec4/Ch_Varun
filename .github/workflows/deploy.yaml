@@ -17,6 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd my-portfolio 
           npm install
           ls
 
