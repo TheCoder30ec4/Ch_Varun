@@ -1,4 +1,4 @@
-name: Deploy Vite Portfolio to GitHub Pages
+name: Deploy Project
 
 on:
   push:
@@ -8,29 +8,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    container:
+      image: node:20
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: npm install
-        working-directory: ./my-portfolio
+        run: npm ci
 
-      - name: Build the project
+      - name: Build project
         run: npm run build
-        working-directory: ./my-portfolio
 
       - name: Deploy to GitHub Pages
+        run: |
+          npx gh-pages -d dist -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -r https://x-access-token:${GH_TOKEN}@github.com/TheCoder30ec4/Portfolio_website.git
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          npx gh-pages -d dist -r https://$GH_TOKEN@github.com/TheCoder30ec4/Portfolio_website.git
-        working-directory: ./my-portfolio
