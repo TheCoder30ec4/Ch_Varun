@@ -1,0 +1,16 @@
+.vertical-timeline-section {
+  padding: 40px 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.timeline-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.vertical-timeline {
+  position: relative;
+}

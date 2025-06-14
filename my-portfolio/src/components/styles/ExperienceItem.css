@@ -1,0 +1,106 @@
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin-left: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.timeline-item:hover {
+  background-color: #1e2124;
+  transform: scale(1.01);
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 9px; /* align with icon center */
+  top: 0;
+  bottom: -20px;
+  width: 2px;
+  background: #40484f;
+}
+
+.timeline-icon {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 2px;
+  top: 22px;
+  z-index: 1;
+}
+
+
+.timeline-content {
+  margin-left: 20px;
+  width: 100%;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.company-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+}
+
+.company-name {
+  color: #4ea1ff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.duration,
+.location {
+  font-size: 14px;
+  color: #a2abb3;
+  margin-top: 2px;
+}
+
+/* Extra details */
+.extra-details {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #2c3135;
+}
+
+.description {
+  font-size: 14px;
+  color: #a2abb3;
+  white-space: pre-line;
+}
+
+.skills {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  background-color: #2c3135;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}

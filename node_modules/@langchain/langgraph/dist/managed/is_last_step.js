@@ -1,0 +1,8 @@
+import { RECURSION_LIMIT_DEFAULT } from "../constants.js";
+import { ManagedValue } from "./base.js";
+export class IsLastStepManager extends ManagedValue {
+    call(step) {
+        return step === (this.config.recursionLimit ?? RECURSION_LIMIT_DEFAULT) - 1;
+    }
+}
+//# sourceMappingURL=is_last_step.js.map

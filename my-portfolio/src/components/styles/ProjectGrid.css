@@ -1,0 +1,18 @@
+.projects-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.projects-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}

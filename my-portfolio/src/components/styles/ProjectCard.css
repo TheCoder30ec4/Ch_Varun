@@ -1,0 +1,93 @@
+.project-card {
+  background-color: #1e2124;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #2c3135;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #4ea1ff;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.description {
+  font-size: 14px;
+  color: #c3cbd4;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  white-space: pre-line;
+}
+
+.cta-btn {
+  background-color: #2c3135;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+}
+
+.cta-btn:hover {
+  background-color: #4ea1ff;
+  color: black;
+}
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.preview-image {
+  width: 100%;
+  max-width: 0px; /* hide until clicked */
+  cursor: pointer;
+  display: none;
+}
+
+.lightbox {
+  display: none; /* keep invisible until triggered by internal lightbox */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cta-btn.preview {
+  background-color: #2c3135;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.cta-btn.preview:hover {
+  background-color: #4ea1ff;
+  color: black;
+}

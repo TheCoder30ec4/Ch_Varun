@@ -1,0 +1,60 @@
+/* Full screen container centered flex */
+.loading-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #1a202c; /* gray-900 equivalent */
+  color: white;
+}
+
+/* Separate color for error text */
+.error-container {
+  color: #f87171; /* red-400 equivalent */
+}
+
+/* Content container aligned center column */
+.loading-content,
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Spinner style */
+.spinner {
+  width: 64px;  /* 16 x 4 */
+  height: 64px; /* 16 x 4 */
+  border: 4px solid #38b2ac; /* teal-400 */
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px; /* 4 units spacing */
+}
+
+/* Loading text style */
+.loading-text {
+  font-size: 1.125rem; /* text-lg */
+  margin-top: 16px;
+}
+
+/* Error title */
+.error-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 8px; /* mb-2 */
+}
+
+/* Error message */
+.error-message {
+  font-size: 1rem;
+}
+
+/* Keyframe for spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

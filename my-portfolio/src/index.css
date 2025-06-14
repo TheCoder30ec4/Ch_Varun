@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121416;
+  font-family: sans-serif,'Space Grotesk','Noto Sans';
+  color: white;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: auto;
+}

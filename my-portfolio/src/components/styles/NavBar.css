@@ -1,0 +1,101 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    border-bottom: 1px solid #2c3135;
+    background-color: #121416;
+    color: white;
+}
+
+.navbar-left{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo svg{
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links{
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links a{
+    position: relative; /* Added this line */
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: white;
+    transition: width 0.3s ease; /* Fixed the typo: 0,3s -> 0.3s */
+}
+
+.nav-links a:hover::after{
+    width: 100%;
+}
+
+.nav-buttons{
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 9999px;
+    background-color: #2c3135;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background-color: #3a4045;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+}
