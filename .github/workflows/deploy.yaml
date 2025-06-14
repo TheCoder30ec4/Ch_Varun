@@ -28,8 +28,8 @@ jobs:
 
       - name: Set Git user
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "your-github-username"
+          git config --global user.email "varun30ec4@gmail.com"
+          git config --global user.name "TheCoder30ec4"
         working-directory: my-portfolio
 
       - name: Deploy to GitHub Pages
