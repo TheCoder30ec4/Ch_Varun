@@ -26,6 +26,12 @@ jobs:
         run: npm run build
         working-directory: my-portfolio
 
+      - name: Set Git user
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "your-github-username"
+        working-directory: my-portfolio
+
       - name: Deploy to GitHub Pages
         run: |
           npm install -g gh-pages
