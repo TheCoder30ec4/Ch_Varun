@@ -25,6 +25,7 @@ jobs:
         run: |
           ls
           cd my-portfolio 
+          ls
           npm run build
 
       - name: Deploy to GitHub Pages
