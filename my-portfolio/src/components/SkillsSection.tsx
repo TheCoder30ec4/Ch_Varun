@@ -32,6 +32,8 @@ const llm = new ChatGroq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
+console.log("GROQ KEY (SkillsSection):", import.meta.env.VITE_GROQ_API_KEY);
+
 interface SkillsSectionProps {
   data: any; // Now accepting the full data object
 }
