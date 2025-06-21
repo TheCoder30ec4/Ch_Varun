@@ -82,7 +82,7 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
 
       const skillNames = skillList.map(s => s.name).join(', ');
       // Re-add explicit JSON formatting instructions to the prompt
-      const prompt = `You are an expert tech hiring manager. Your task is to categorize a list of software development skills into logical groups.\n      Given the list of skills: [${skillNames}].\n      Categorize them into relevant groups such as "Frontend", "Backend", "Languages", "Databases", "DevOps", "Testing", and "Tools".\n      You MUST return ONLY a single valid JSON object in the following format: { "categories": [{ "category": "CategoryName", "skills": [{ "name": "SkillName" }] }] }.\n      Do not include any introductory text, backticks, or explanations outside of the JSON object.`;
+      const prompt = `You are an expert tech hiring manager. Your task is to categorize a list of software development skills into logical groups.\n      Given the list of skills: [${skillNames}].\n      Categorize them into relevant groups such as \"Frontend\", \"Backend\", \"Languages\", \"Databases\", \"DevOps\", \"Testing\", and \"Tools\".\n      You MUST return ONLY a single valid JSON object in the following format: { \"categories\": [{ \"category\": \"CategoryName\", \"skills\": [{ \"name\": \"SkillName\" }] }] }.\n      Do NOT include any introductory text, backticks, or explanations outside of the JSON object.\n      Do NOT omit any closing brackets or braces. Only output valid JSON.`;
 
       try {
         const response = await llm.invoke(prompt);
@@ -97,8 +97,21 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
           throw new Error("No valid JSON object found in LLM response.");
         }
 
-        const jsonString = content.substring(startIndex, endIndex + 1);
+        let jsonString = content.substring(startIndex, endIndex + 1);
         console.log("JSON String being parsed:", jsonString);
+
+        // --- Auto-repair for missing closing brackets/braces ---
+        const openCurly = (jsonString.match(/{/g) || []).length;
+        const closeCurly = (jsonString.match(/}/g) || []).length;
+        const openSquare = (jsonString.match(/\[/g) || []).length;
+        const closeSquare = (jsonString.match(/\]/g) || []).length;
+        if (openCurly > closeCurly) {
+          jsonString += '}'.repeat(openCurly - closeCurly);
+        }
+        if (openSquare > closeSquare) {
+          jsonString += ']'.repeat(openSquare - closeSquare);
+        }
+
         const jsonResponse = JSON.parse(jsonString);
         
         if (jsonResponse.categories && jsonResponse.categories.length > 0) {
