@@ -1,106 +1,83 @@
-.timeline-item {
-  display: flex;
-  align-items: flex-start;
+/* Individual role item styling */
+.role-card {
+  background: rgba(30, 30, 50, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px 30px;
   position: relative;
-  margin-left: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.timeline-item:hover {
-  background-color: #1e2124;
-  transform: scale(1.01);
+.role-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(165, 180, 252, 0.3);
 }
 
-.timeline-item::before {
-  content: "";
+/* Connector line from timeline to the card's vertical center */
+.role-card::before {
+  content: '';
   position: absolute;
-  left: 9px; /* align with icon center */
-  top: 0;
-  bottom: -20px;
-  width: 2px;
-  background: #40484f;
+  left: -20px; /* Position line outside the card, connecting to timeline */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* Length of the line */
+  height: 2px;
+  background: rgba(165, 180, 252, 0.2);
 }
 
-.timeline-icon {
-  width: 16px;
-  height: 16px;
+.glowing-dot {
   position: absolute;
-  left: 2px;
-  top: 22px;
-  z-index: 1;
+  right: -20px; /* Position dot on the right edge of the card */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #d8b4fe;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #d8b4fe, 0 0 18px #d8b4fe;
 }
 
-
-.timeline-content {
-  margin-left: 20px;
-  width: 100%;
-}
-
-.header-row {
+.card-header {
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-bottom: 16px;
 }
 
-.company-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  object-fit: cover;
+.card-internal-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.title-block {
+.role-card-title {
+  font-size: 1.15em; /* Slightly larger for emphasis */
+  font-weight: 600;
+  color: #e5e7eb;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.role-card-meta {
   display: flex;
   flex-direction: column;
+  gap: 6px; /* Tighter spacing */
+  font-size: 0.88em; /* Slightly larger for readability */
+  color: rgba(201, 209, 217, 0.7); /* Clearer text color */
+  padding-left: 0;
 }
 
-.title {
-  color: white;
-  font-size: 16px;
-  margin: 0;
-}
-
-.company-name {
-  color: #4ea1ff;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.duration,
-.location {
-  font-size: 14px;
-  color: #a2abb3;
-  margin-top: 2px;
-}
-
-/* Extra details */
-.extra-details {
-  margin-top: 12px;
-  padding-top: 8px;
-  border-top: 1px solid #2c3135;
-}
-
-.description {
-  font-size: 14px;
-  color: #a2abb3;
-  white-space: pre-line;
-}
-
-.skills {
-  margin-top: 10px;
+.meta-item {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 8px; /* Consistent gap for icons and text */
 }
 
-.skill-tag {
-  background-color: #2c3135;
-  color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
+.meta-item svg {
+  color: rgba(165, 180, 252, 0.8); /* Stronger icon color for visibility */
+} 

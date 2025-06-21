@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './styles/ProfileSection.css';
 import { ChatGroq } from '@langchain/groq';
 
@@ -8,6 +8,7 @@ interface Props {
   about: string;
   name?: string;
   linkedin?: string;
+  children?: React.ReactNode;
 }
 
 
@@ -17,7 +18,7 @@ const llm = new ChatGroq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
-const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin }: Props) => {
+const ProfileSection: React.FC<Props> = ({ profile_image_url, about, name = "Ch.Varun", linkedin, children }) => {
     // console.log(linkedin)
     if(!linkedin){
         linkedin="";
@@ -32,11 +33,16 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatMessagesContainerRef = useRef<HTMLDivElement | null>(null);
   const [conversationHistory, setConversationHistory] = useState<{ role: string; content: string }[]>([]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatMessagesContainerRef.current) {
+      chatMessagesContainerRef.current.scrollTo({
+        top: chatMessagesContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   };
 
   useEffect(() => {
@@ -100,7 +106,7 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
   };
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" id="home">
       <div className="hero-content">
         <div className="profile-image"><img src={profile_image_url} alt="Profile" /></div>
         <div className="profile-info">
@@ -117,11 +123,19 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
         <div className="chat-interface">
           <h3 className="chat-title">Live Chat with me 🙂</h3>
           <div className="chat-container">
-            <div className="chat-messages">
+            <div className="chat-messages" ref={chatMessagesContainerRef}>
               {messages.map((message) => (
                 <div key={message.id} className={`message ${message.sender}`}>
                   <div className="message-avatar">
-                    {message.sender === 'bot' ? <div className="bot-avatar"></div> : <div className="user-avatar">👤</div>}
+                    {message.sender === 'bot' ? (
+                      <img src={profile_image_url} alt="Bot Avatar" className="bot-avatar-img" />
+                    ) : (
+                      <div className="user-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                   <div className="message-content">
                     <div className="message-sender-name">{message.sender === 'bot' ? name : 'You'}</div>
@@ -131,7 +145,9 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
               ))}
               {isTyping && (
                 <div className="message bot">
-                  <div className="message-avatar"><div className="bot-avatar"></div></div>
+                  <div className="message-avatar">
+                    <img src={profile_image_url} alt="Bot Avatar" className="bot-avatar-img" />
+                  </div>
                   <div className="message-content">
                     <div className="message-sender-name">{name}</div>
                     <div className="message-bubble typing">
@@ -140,11 +156,9 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
                   </div>
                 </div>
               )}
-              <div ref={messagesEndRef} />
             </div>
 
             <div className="chat-input-container">
-              <div className="user-avatar-input">👤</div>
               <div className="chat-input-wrapper">
                 <input
                   type="text"
@@ -158,8 +172,11 @@ const ProfileSection = ({ profile_image_url, about, name = "Ch.Varun", linkedin 
                   onClick={handleSendMessage}
                   className="send-button"
                   disabled={!inputValue.trim()}
+                  aria-label="Send message"
                 >
-                  Send
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                  </svg>
                 </button>
               </div>
             </div>

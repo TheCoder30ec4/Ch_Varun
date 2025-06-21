@@ -9,7 +9,7 @@ import ProjectGrid from './components/ProjectsGrid';
 import CertificateGrid from './components/CertificateGrid';
 import ContactSection from './components/Contact';
 import ContactForm from './components/ContactForm';
-import { fallbackData } from './utils/fallbackData';
+import { fallbackData } from './utils/fallbackData.ts';
 
 function App() {
   const [data, setData] = useState<any>(null);
@@ -21,7 +21,7 @@ function App() {
             try {
                 // Try to fetch data from API with a timeout
                 const timeoutPromise = new Promise((_, reject) => 
-                    setTimeout(() => reject(new Error('API timeout')), 15000)
+                    setTimeout(() => reject(new Error('API timeout')), 120000)
                 );
                 
                 const dataPromise = get_data();
@@ -68,6 +68,7 @@ function App() {
       </div>
     );
   }
+
   return (
     <>
       <NavBar />
@@ -76,14 +77,18 @@ function App() {
           profile_image_url={data.basic_info.profile_picture_url}
           about={data.basic_info.about}
           linkedin={String(DataString)}
-        />
-        <SkillsSection/>
+        >
+          <h1 className="profile-name">{data.basic_info.name}</h1>
+          <p className="profile-title">Software Developer @ HashedIn by Deloitte</p>
+        </ProfileSection>
+        <SkillsSection data={data} />
         <ExperienceSection experienceData={data.experience}/>
         <ProjectGrid projects={data.projects}/>
         <CertificateGrid certifications={data.certifications}/>
-        <ContactForm/>
-        <ContactSection/>
-
+        <section id="contact">
+          <ContactForm/>
+          <ContactSection/>
+        </section>
       </main>
     </>
   );
