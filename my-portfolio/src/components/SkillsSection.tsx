@@ -32,7 +32,6 @@ const llm = new ChatGroq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
-console.log("GROQ KEY (SkillsSection):", import.meta.env.VITE_GROQ_API_KEY);
 
 interface SkillsSectionProps {
   data: any; // Now accepting the full data object
@@ -82,7 +81,7 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
 
       const skillNames = skillList.map(s => s.name).join(', ');
       // Re-add explicit JSON formatting instructions to the prompt
-      const prompt = `You are an expert tech hiring manager. Your task is to categorize a list of software development skills into logical groups.\n      Given the list of skills: [${skillNames}].\n      Categorize them into relevant groups such as \"Frontend\", \"Backend\", \"Languages\", \"Databases\", \"DevOps\", \"Testing\", and \"Tools\".\n      You MUST return ONLY a single valid JSON object in the following format: { \"categories\": [{ \"category\": \"CategoryName\", \"skills\": [{ \"name\": \"SkillName\" }] }] }.\n      Do NOT include any introductory text, backticks, or explanations outside of the JSON object.\n      Do NOT omit any closing brackets or braces. Only output valid JSON.`;
+      const prompt = `You are an expert tech hiring manager. Your task is to categorize a list of software development skills into logical groups.\n      Given the list of skills: [${skillNames}].\n      Categorize them into relevant groups such as \"Frontend\", \"Backend\", \"Languages\", \"Databases\", \"DevOps\", \"Testing\", and \"Tools\".\n      You MUST return ONLY a single valid JSON object in the following format: { \"categories\": [{ \"category\": \"CategoryName\", \"skills\": [{ \"name\": \"SkillName\" }] }] }.\n      Do NOT include any introductory text, backticks, or explanations outside of the JSON object.\n      Do NOT omit any closing brackets or braces. Only output valid JSON. Also from the projects if you get another skills feel free to mention`;
 
       try {
         const response = await llm.invoke(prompt);
