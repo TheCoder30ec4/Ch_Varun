@@ -18,7 +18,6 @@ const llm = new ChatGroq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
-console.log("GROQ KEY (ProfileSection):", import.meta.env.VITE_GROQ_API_KEY);
 
 const ProfileSection: React.FC<Props> = ({ profile_image_url, about, name = "Ch.Varun", linkedin, children }) => {
     // console.log(linkedin)
