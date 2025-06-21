@@ -27,6 +27,7 @@ export type CalibrationProps = {
 const llm = new ChatGroq({
   model: "llama3-70b-8192", // or "llama-3-70b-8192" depending on Groq's model naming
   temperature: 0,
+  apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
 // ---- System Prompt Builder ---- //
