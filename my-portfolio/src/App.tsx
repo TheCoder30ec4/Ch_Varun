@@ -9,28 +9,34 @@ import ProjectGrid from './components/ProjectsGrid';
 import CertificateGrid from './components/CertificateGrid';
 import ContactSection from './components/Contact';
 import ContactForm from './components/ContactForm';
+import { fallbackData } from './utils/fallbackData';
 
 function App() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // The result is expected to be an array: [ { basic_info: ... } ]
-                const result: any = await get_data();
+                // Try to fetch data from API with a timeout
+                const timeoutPromise = new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error('API timeout')), 15000)
+                );
                 
-                // FIX: Check if the result is valid and access the first element
+                const dataPromise = get_data();
+                const result: any = await Promise.race([dataPromise, timeoutPromise]);
+                
+                // Check if the result is valid and access the first element
                 if (result && result.length > 0) {
                     setData(result[0]); // Set the object, not the array, to state
                 } else {
                    throw new Error("No data received from API.");
                 }
             } catch (err: any) {
-                console.error("Error fetching data:", err);
-                setError(err.message || "Failed to fetch portfolio data.");
+                console.warn("API failed, using fallback data:", err.message);
+                // Use fallback data instead of showing error
+                setData(fallbackData);
             } finally {
                 setLoading(false);
             }
@@ -52,12 +58,12 @@ function App() {
     );
   }
 
-  if (error || !data) {
+  if (!data) {
     return (
       <div className="error-container">
         <div className="error-content">
           <h2 className="error-title">Oops! Something went wrong.</h2>
-          <p className="error-message">{error || "Could not load the portfolio data. Please try again later."}</p>
+          <p className="error-message">Could not load the portfolio data. Please try again later.</p>
         </div>
       </div>
     );

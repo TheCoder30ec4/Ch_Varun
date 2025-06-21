@@ -2,7 +2,7 @@
   "name": "my-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://TheCoder30ec4.github.io/my-portfolio",
+  "homepage": "https://TheCoder30ec4.github.io/Portfolio_website",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

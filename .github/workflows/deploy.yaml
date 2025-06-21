@@ -3,6 +3,7 @@ name: Deploy Project
 on:
   push:
     branches:
+      - main
       - master
 
 permissions:
@@ -14,7 +15,14 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: my-portfolio/package-lock.json
 
       - name: Install & Build
         run: |
@@ -22,9 +30,8 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy via oprypin
-        uses: oprypin/push-to-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: my-portfolio/dist
-        env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./my-portfolio/dist
