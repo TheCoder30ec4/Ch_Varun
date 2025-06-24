@@ -24,9 +24,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: my-portfolio/package-lock.json
 
-      - name: Create .env file
-        run: |
-          echo "VITE_GROQ_API_KEY=${{ secrets.VITE_GROQ_API_KEY }}" > my-portfolio/.env
 
       - name: Install & Build
         run: |
