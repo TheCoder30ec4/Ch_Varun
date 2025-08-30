@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './styles/ProfileSection.css';
 import { ChatGroq } from '@langchain/groq';
-
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Send, User, Bot } from 'lucide-react';
 
 interface Props {
   profile_image_url: string;
@@ -11,19 +13,17 @@ interface Props {
   children?: React.ReactNode;
 }
 
-
 const llm = new ChatGroq({
   model: "llama3-70b-8192",
   temperature: 0,
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
 });
 
-
 const ProfileSection: React.FC<Props> = ({ profile_image_url, about, name = "Ch.Varun", linkedin, children }) => {
-    // console.log(linkedin)
-    if(!linkedin){
-        linkedin="";
-    }
+  if (!linkedin) {
+    linkedin = "";
+  }
+
   const [messages, setMessages] = useState<any[]>([
     {
       id: 1,
@@ -107,84 +107,120 @@ const ProfileSection: React.FC<Props> = ({ profile_image_url, about, name = "Ch.
   };
 
   return (
-    <section className="hero-section" id="home">
-      <div className="hero-content">
-        <div className="profile-image"><img src={profile_image_url} alt="Profile" /></div>
-        <div className="profile-info">
-          <h1 className="profile-name">{name}</h1>
-          <p className="profile-title">Software Developer @ HashedIn by Deloitte</p>
-        </div>
-        <div className="welcome-section">
-          <h2 className="welcome-title">Welcome to my Portfolio-Website</h2>
-          <p className="welcome-description">
-            {about} Here is my GitHub, you can explore my projects: <a href="https://github.com/TheCoder30ec4">GitHub</a>
-          </p>
+    <section className="container mx-auto px-4 py-16" id="home">
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+        {/* Profile Info */}
+        <div className="space-y-6">
+          <div className="flex items-center space-x-6">
+            <div className="relative">
+              <img 
+                src={profile_image_url} 
+                alt="Profile" 
+                className="h-24 w-24 rounded-full object-cover ring-4 ring-primary/20"
+              />
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold tracking-tight">{name}</h1>
+              <p className="text-xl text-muted-foreground">Software Developer @ HashedIn by Deloitte</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Welcome to my Portfolio</h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {about} Here is my GitHub, you can explore my projects:{' '}
+              <a 
+                href="https://github.com/TheCoder30ec4" 
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </p>
+          </div>
         </div>
 
-        <div className="chat-interface">
-          <h3 className="chat-title">Live Chat with me 🙂</h3>
-          <div className="chat-container">
-            <div className="chat-messages" ref={chatMessagesContainerRef}>
+        {/* Chat Interface */}
+        <Card className="h-[600px] flex flex-col overflow-hidden">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Bot className="h-5 w-5" />
+              <span>Live Chat with me 🙂</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex-1 flex min-h-0 flex-col space-y-4">
+            <div 
+              className="flex-1 min-h-0 overflow-y-scroll custom-scrollbar space-y-4 pr-2"
+              ref={chatMessagesContainerRef}
+            >
               {messages.map((message) => (
-                <div key={message.id} className={`message ${message.sender}`}>
-                  <div className="message-avatar">
-                    {message.sender === 'bot' ? (
-                      <img src={profile_image_url} alt="Bot Avatar" className="bot-avatar-img" />
-                    ) : (
-                      <div className="user-avatar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                        </svg>
-                      </div>
-                    )}
+                <div key={message.id} className={`flex space-x-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  {message.sender === 'bot' && (
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                      <img src={profile_image_url} alt="Bot Avatar" className="h-6 w-6 rounded-full" />
+                    </div>
+                  )}
+                  <div className={`max-w-[80%] space-y-1 ${message.sender === 'user' ? 'order-first' : ''}`}>
+                    <div className="text-xs text-muted-foreground">
+                      {message.sender === 'bot' ? name : 'You'}
+                    </div>
+                    <div className={`rounded-lg px-3 py-2 text-sm ${
+                      message.sender === 'user' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted text-foreground'
+                    }`}>
+                      {message.text}
+                    </div>
                   </div>
-                  <div className="message-content">
-                    <div className="message-sender-name">{message.sender === 'bot' ? name : 'You'}</div>
-                    <div className="message-bubble">{message.text}</div>
-                  </div>
+                  {message.sender === 'user' && (
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                      <User className="h-4 w-4 text-primary" />
+                    </div>
+                  )}
                 </div>
               ))}
               {isTyping && (
-                <div className="message bot">
-                  <div className="message-avatar">
-                    <img src={profile_image_url} alt="Bot Avatar" className="bot-avatar-img" />
+                <div className="flex space-x-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                    <img src={profile_image_url} alt="Bot Avatar" className="h-6 w-6 rounded-full" />
                   </div>
-                  <div className="message-content">
-                    <div className="message-sender-name">{name}</div>
-                    <div className="message-bubble typing">
-                      <div className="typing-indicator"><span></span><span></span><span></span></div>
+                  <div className="space-y-1">
+                    <div className="text-xs text-muted-foreground">{name}</div>
+                    <div className="rounded-lg px-3 py-2 text-sm bg-muted">
+                      <div className="flex space-x-1">
+                        <div className="h-2 w-2 rounded-full bg-muted-foreground typing-dot"></div>
+                        <div className="h-2 w-2 rounded-full bg-muted-foreground typing-dot"></div>
+                        <div className="h-2 w-2 rounded-full bg-muted-foreground typing-dot"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="chat-input-container">
-              <div className="chat-input-wrapper">
-                <input
-                  type="text"
-                  placeholder="Type your message here..."
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  className="chat-input"
-                />
-                <button
-                  onClick={handleSendMessage}
-                  className="send-button"
-                  disabled={!inputValue.trim()}
-                  aria-label="Send message"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                  </svg>
-                </button>
-              </div>
+            <div className="flex space-x-2">
+              <Input
+                placeholder="Type your message here..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="flex-1"
+              />
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim()}
+                size="icon"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
             </div>
 
-            <p className="chat-disclaimer">AI-powered responses may take a moment. Please be patient.</p>
-          </div>
-        </div>
+            <p className="text-xs text-muted-foreground text-center">
+              AI-powered responses may take a moment. Please be patient.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

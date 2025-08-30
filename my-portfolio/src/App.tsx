@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import NavBar from './components/NavBar';
 import ProfileSection from './components/ProfileSection';
 import get_data from './utils/DataScraper/ApifyClient';
@@ -16,43 +15,40 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Try to fetch data from API with a timeout
-                const timeoutPromise = new Promise((_, reject) => 
-                    setTimeout(() => reject(new Error('API timeout')), 120000)
-                );
-                
-                const dataPromise = get_data();
-                const result: any = await Promise.race([dataPromise, timeoutPromise]);
-                
-                // Check if the result is valid and access the first element
-                if (result && result.length > 0) {
-                    setData(result[0]); // Set the object, not the array, to state
-                } else {
-                   throw new Error("No data received from API.");
-                }
-            } catch (err: any) {
-                console.warn("API failed, using fallback data:", err.message);
-                // Use fallback data instead of showing error
-                setData(fallbackData);
-            } finally {
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('API timeout')), 120000)
+        );
+        
+        const dataPromise = get_data();
+        const result: any = await Promise.race([dataPromise, timeoutPromise]);
+        
+        if (result && result.length > 0) {
+          setData(result[0]);
+        } else {
+          throw new Error("No data received from API.");
+        }
+      } catch (err: any) {
+        console.warn("API failed, using fallback data:", err.message);
+        setData(fallbackData);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchData();
-    }, []);
+    fetchData();
+  }, []);
 
-    const DataString = JSON.stringify(data);
+  const DataString = JSON.stringify(data);
 
-    if (loading) {
+  if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-content">
-          <div className="spinner"></div>
-          <p className="loading-text">Loading Portfolio...</p>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent mx-auto"></div>
+          <p className="text-foreground/70">Loading Portfolio...</p>
         </div>
       </div>
     );
@@ -60,19 +56,19 @@ function App() {
 
   if (!data) {
     return (
-      <div className="error-container">
-        <div className="error-content">
-          <h2 className="error-title">Oops! Something went wrong.</h2>
-          <p className="error-message">Could not load the portfolio data. Please try again later.</p>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4 max-w-md mx-auto px-4">
+          <h2 className="text-2xl font-bold text-foreground">Oops! Something went wrong.</h2>
+          <p className="text-foreground/70">Could not load the portfolio data. Please try again later.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <NavBar />
-      <main>
+      <main className="space-y-0">
         <ProfileSection
           profile_image_url={data.basic_info.profile_picture_url}
           about={data.basic_info.about}
@@ -85,12 +81,10 @@ function App() {
         <ExperienceSection experienceData={data.experience}/>
         <ProjectGrid projects={data.projects}/>
         <CertificateGrid certifications={data.certifications}/>
-        <section id="contact">
-          <ContactForm/>
-          <ContactSection/>
-        </section>
+        <ContactForm/>
+        <ContactSection/>
       </main>
-    </>
+    </div>
   );
 }
 

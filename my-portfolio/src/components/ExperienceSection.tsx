@@ -1,13 +1,13 @@
 import React from 'react';
-import ExperienceItem from './ExperienceItem';
 import type { Experience } from '../utils/Experience';
-import './styles/ExperienceSection.css';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import { Clock, MapPin, Building2 } from 'lucide-react';
 
 interface ExperienceSectionProps {
   experienceData: Experience[];
 }
 
-// Helper function to group experiences by company
 const groupExperienceByCompany = (experiences: Experience[]) => {
   if (!experiences) {
     return [];
@@ -23,7 +23,6 @@ const groupExperienceByCompany = (experiences: Experience[]) => {
       };
     }
     acc[companyName].roles.push(exp);
-    // Sort roles by start date, newest first
     acc[companyName].roles.sort((a, b) => {
       const dateA = new Date(a.start_date.year, a.start_date.month ? a.start_date.month - 1 : 0);
       const dateB = new Date(b.start_date.year, b.start_date.month ? b.start_date.month - 1 : 0);
@@ -39,30 +38,85 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experienceData })
   const groupedExperience = groupExperienceByCompany(experienceData);
 
   return (
-    <section className="experience-section" id="experience">
-      <h2 className="experience-title">Experience</h2>
-      <div className="timeline-container animated-section">
-        <div className="timeline-line"></div>
-        <div className="timeline-content">
+    <section className="container mx-auto px-4 py-16" id="experience">
+      <div className="space-y-8">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            My professional journey and work experience across different companies and roles
+          </p>
+        </div>
+
+        <div className="space-y-8">
           {groupedExperience.map((companyGroup, index) => (
-            <div className="timeline-item" key={index}>
-              <div className="timeline-dot"></div>
-              <div className="company-panel">
-                <div className="company-info">
-                  {companyGroup.logo && <img src={companyGroup.logo} alt={`${companyGroup.company} logo`} className="company-logo" />}
-                  <h3 className="company-name">{companyGroup.company}</h3>
+            <Card key={index} className="overflow-hidden">
+              <CardHeader className="bg-card">
+                <div className="flex items-center space-x-4">
+                  {companyGroup.logo && (
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-background">
+                      <img 
+                        src={companyGroup.logo} 
+                        alt={`${companyGroup.company} logo`} 
+                        className="h-8 w-8 object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <CardTitle className="flex items-center space-x-2">
+                      <Building2 className="h-5 w-5" />
+                      <span>{companyGroup.company}</span>
+                    </CardTitle>
+                  </div>
                 </div>
-                <div className="roles-container">
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-6">
                   {companyGroup.roles.map((exp, roleIndex) => (
-                    <ExperienceItem
-                      key={roleIndex}
-                      experience={exp}
-                      isLastRole={roleIndex === companyGroup.roles.length - 1}
-                    />
+                    <div key={roleIndex} className="relative">
+                      {roleIndex > 0 && (
+                        <div className="absolute left-6 top-0 h-6 w-px bg-border"></div>
+                      )}
+                      <div className="flex space-x-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                          <div className="h-3 w-3 rounded-full bg-primary"></div>
+                        </div>
+                        <div className="flex-1 space-y-3">
+                          <div>
+                            <h4 className="text-lg font-semibold">{exp.title}</h4>
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mt-1">
+                              <div className="flex items-center space-x-1">
+                                <Clock className="h-4 w-4" />
+                                <span>{exp.duration}</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <MapPin className="h-4 w-4" />
+                                <span>{exp.location}</span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {exp.description && (
+                            <p className="text-muted-foreground leading-relaxed">
+                              {exp.description}
+                            </p>
+                          )}
+                          
+                          {exp.skills && exp.skills.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {exp.skills.map((skill, skillIndex) => (
+                                <Badge key={skillIndex} variant="outline" className="text-xs">
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
