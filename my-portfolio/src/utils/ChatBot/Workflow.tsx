@@ -10,7 +10,6 @@ import {
 } from "@langchain/langgraph";
 import { v4 as uuidv4 } from "uuid";
 
-console.log("GROQ KEY (Workflow):", import.meta.env.VITE_GROQ_API_KEY);
 
 // ---- Message Type ---- //
 export type ChatMessage = {

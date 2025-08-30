@@ -31,7 +31,6 @@ function App() {
           throw new Error("No data received from API.");
         }
       } catch (err: any) {
-        console.warn("API failed, using fallback data:", err.message);
         setData(fallbackData);
       } finally {
         setLoading(false);

@@ -1,10 +1,18 @@
 // src/DataScraper/get_data.ts
 
-const get_data = async ({
-  url = "https://www.linkedin.com/in/ch-varun/",
-  api_token = "apify_api_khHJAzd0dbHxZSgarkHmhBjDfDlbR803ixV3",
-} = {}) => {
+type GetDataParams = {
+  url?: string;
+};
+
+const get_data = async (
+  { url = "https://www.linkedin.com/in/ch-varun/" }: GetDataParams = {}
+) => {
   const actorId = "VhxlqQXRwhW8H5hNV";
+  const api_token = import.meta.env.VITE_APIFY_TOKEN as string | undefined;
+
+  if (!api_token) {
+    throw new Error("APIFY token missing. Set VITE_APIFY_TOKEN in your .env (not committed).");
+  }
 
   // Step 1: Run the actor
   const runRes = await fetch(
@@ -30,12 +38,7 @@ const get_data = async ({
 
   // Step 3: Fetch results
   const itemsRes = await fetch(
-    `https://api.apify.com/v2/datasets/${datasetId}/items?clean=true&format=json`,
-    {
-      headers: {
-        Authorization: `Bearer ${api_token}`,
-      },
-    }
+    `https://api.apify.com/v2/datasets/${datasetId}/items?clean=true&format=json&token=${api_token}`
   );
 
   const items = await itemsRes.json();

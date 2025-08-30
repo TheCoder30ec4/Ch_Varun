@@ -89,7 +89,7 @@ const ProfileSection: React.FC<Props> = ({ profile_image_url, about, name = "Ch.
       setMessages(prev => [...prev, botMessage]);
       setConversationHistory([...newHistory, { role: 'assistant', content: botContent }]);
     } catch (err) {
-      console.error(err);
+      // swallow to keep UI responsive
     } finally {
       setIsTyping(false);
     }

@@ -61,7 +61,6 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
       setError(null);
 
       if (!import.meta.env.VITE_GROQ_API_KEY) {
-        console.warn("Groq API key is missing. Displaying skills without categorization.");
         setCategorizedSkills([{ category: "All Skills", skills: skillList }]);
         setIsLoading(false);
         return;
@@ -73,7 +72,6 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
       try {
         const response = await llm.invoke(prompt);
         let content = response.content as string;
-        console.log("Raw LLM Content:", content);
 
         const startIndex = content.indexOf('{');
         const endIndex = content.lastIndexOf('}');
@@ -83,7 +81,6 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
         }
 
         let jsonString = content.substring(startIndex, endIndex + 1);
-        console.log("JSON String being parsed:", jsonString);
 
         const openCurly = (jsonString.match(/{/g) || []).length;
         const closeCurly = (jsonString.match(/}/g) || []).length;
@@ -104,7 +101,6 @@ const SkillsSection = ({ data }: SkillsSectionProps) => {
           throw new Error("Invalid JSON structure from LLM.");
         }
       } catch (e) {
-        console.error("Failed to categorize skills:", e);
         setError("Could not categorize skills. Displaying in a simple list.");
         setCategorizedSkills([{ category: "All Skills", skills: skillList }]);
       } finally {
