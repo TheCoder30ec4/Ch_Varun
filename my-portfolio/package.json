@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "homepage": "https://TheCoder30ec4.github.io/Portfolio_website",
+  "homepage": "https://TheCoder30ec4.github.io/Ch_Varun",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
