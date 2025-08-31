@@ -24,8 +24,12 @@ const groupExperienceByCompany = (experiences: Experience[]) => {
     }
     acc[companyName].roles.push(exp);
     acc[companyName].roles.sort((a, b) => {
-      const dateA = new Date(a.start_date.year, a.start_date.month ? a.start_date.month - 1 : 0);
-      const dateB = new Date(b.start_date.year, b.start_date.month ? b.start_date.month - 1 : 0);
+      const yA = a.start_date?.year ?? 0;
+      const mA = (a.start_date?.month ?? 1) - 1;
+      const yB = b.start_date?.year ?? 0;
+      const mB = (b.start_date?.month ?? 1) - 1;
+      const dateA = new Date(yA, Math.max(0, mA));
+      const dateB = new Date(yB, Math.max(0, mB));
       return dateB.getTime() - dateA.getTime();
     });
     return acc;
