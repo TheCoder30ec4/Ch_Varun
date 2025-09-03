@@ -24,6 +24,15 @@ jobs:
           cache: 'npm'
           cache-dependency-path: my-portfolio/package-lock.json
 
+      - name: Verify secrets (masked)
+        run: |
+          if [ -z "$VITE_GROQ_API_KEY" ]; then
+            echo "VITE_GROQ_API_KEY is NOT set" && exit 1
+          fi
+          echo "::add-mask::$VITE_GROQ_API_KEY"
+          echo "VITE_GROQ_API_KEY length: ${#VITE_GROQ_API_KEY}"
+        env:
+          VITE_GROQ_API_KEY: ${{ secrets.VITE_GROQ_API_KEY }}
 
       - name: Install & Build
         run: |
