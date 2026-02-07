@@ -53,7 +53,7 @@ const ContactForm = () => {
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold tracking-tight">Contact Me</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-muted-foreground">
             I also do freelance work. Feel free to reach out for collaborations, project inquiries, or just to say hello!
           </p>
         </div>
@@ -131,16 +131,16 @@ const ContactForm = () => {
               </Button>
 
               {status === 'sent' && (
-                <div className="flex items-center space-x-2 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <span className="text-green-800 text-sm">Message sent successfully!</span>
+                <div className="flex items-center space-x-2 p-3 bg-emerald-900/20 border border-emerald-700/30 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-emerald-400" />
+                  <span className="text-emerald-300 text-sm">Message sent successfully!</span>
                 </div>
               )}
               
               {status === 'error' && (
-                <div className="flex items-center space-x-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  <span className="text-red-800 text-sm">Something went wrong. Try again!</span>
+                <div className="flex items-center space-x-2 p-3 bg-red-900/20 border border-red-700/30 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-red-400" />
+                  <span className="text-red-300 text-sm">Something went wrong. Try again!</span>
                 </div>
               )}
             </form>

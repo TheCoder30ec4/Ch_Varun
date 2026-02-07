@@ -1,109 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   LUMINA DARK LUXURY THEME
+   ======================================== */
+
 :root {
-  --background: rgb(250, 249, 245);
-  --foreground: rgb(61, 57, 41);
-  --card: rgb(250, 249, 245);
-  --card-foreground: rgb(20, 20, 19);
-  --popover: rgb(255, 255, 255);
-  --popover-foreground: rgb(40, 38, 27);
-  --primary: rgb(201, 100, 66);
-  --primary-foreground: rgb(255, 255, 255);
-  --secondary: rgb(233, 230, 220);
-  --secondary-foreground: rgb(83, 81, 70);
-  --muted: rgb(237, 233, 222);
-  --muted-foreground: rgb(131, 130, 125);
-  --accent: rgb(233, 230, 220);
-  --accent-foreground: rgb(40, 38, 27);
-  --destructive: rgb(20, 20, 19);
+  /* Core Palette - Dark Luxury */
+  --background: rgb(10, 10, 10);
+  --foreground: rgb(255, 255, 255);
+  --card: rgb(15, 15, 15);
+  --card-foreground: rgb(245, 245, 240);
+  --popover: rgb(18, 18, 18);
+  --popover-foreground: rgb(230, 230, 225);
+  --primary: rgb(212, 175, 55);
+  --primary-foreground: rgb(10, 10, 10);
+  --secondary: rgb(24, 24, 22);
+  --secondary-foreground: rgb(200, 200, 195);
+  --muted: rgb(20, 20, 18);
+  --muted-foreground: rgb(128, 128, 120);
+  --accent: rgb(24, 22, 16);
+  --accent-foreground: rgb(245, 240, 230);
+  --destructive: rgb(200, 50, 50);
   --destructive-foreground: rgb(255, 255, 255);
-  --border: rgb(218, 217, 212);
-  --input: rgb(180, 178, 167);
-  --ring: rgb(201, 100, 66);
-  --chart-1: rgb(176, 87, 48);
-  --chart-2: rgb(156, 135, 245);
-  --chart-3: rgb(222, 216, 196);
-  --chart-4: rgb(219, 211, 240);
-  --chart-5: rgb(180, 85, 45);
-  --sidebar: rgb(245, 244, 238);
-  --sidebar-foreground: rgb(61, 61, 58);
-  --sidebar-primary: rgb(201, 100, 66);
-  --sidebar-primary-foreground: rgb(251, 251, 251);
-  --sidebar-accent: rgb(233, 230, 220);
-  --sidebar-accent-foreground: rgb(52, 52, 52);
-  --sidebar-border: rgb(235, 235, 235);
-  --sidebar-ring: rgb(181, 181, 181);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --border: rgb(35, 35, 32);
+  --input: rgb(35, 35, 32);
+  --ring: rgb(212, 175, 55);
+
+  /* Charts */
+  --chart-1: rgb(212, 175, 55);
+  --chart-2: rgb(168, 140, 50);
+  --chart-3: rgb(255, 215, 100);
+  --chart-4: rgb(140, 115, 40);
+  --chart-5: rgb(180, 150, 60);
+
+  /* Sidebar */
+  --sidebar: rgb(12, 12, 12);
+  --sidebar-foreground: rgb(200, 200, 195);
+  --sidebar-primary: rgb(212, 175, 55);
+  --sidebar-primary-foreground: rgb(10, 10, 10);
+  --sidebar-accent: rgb(18, 18, 16);
+  --sidebar-accent-foreground: rgb(200, 200, 195);
+  --sidebar-border: rgb(30, 30, 28);
+  --sidebar-ring: rgb(212, 175, 55);
+
+  /* Fonts */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Cormorant Garamond', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display: 'Cormorant Garamond', serif;
+
+  /* Lumina-specific */
+  --color-bg: #0a0a0a;
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+  --color-text-light: rgba(255, 255, 255, 0.5);
+  --color-accent: #d4af37;
+  --font-size-mono: clamp(10px, 1.2vw, 12px);
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+
+  /* Layout */
   --radius: 0.5rem;
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.25), 0 1px 2px -1px hsl(0 0% 0% / 0.20);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.25), 0 1px 2px -1px hsl(0 0% 0% / 0.20);
+  --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.30), 0 2px 4px -2px hsl(0 0% 0% / 0.20);
+  --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.35), 0 4px 6px -4px hsl(0 0% 0% / 0.20);
+  --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.40), 0 8px 10px -6px hsl(0 0% 0% / 0.20);
+  --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.60);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
 
+/* Dark mode is now the same luxury theme (slightly deeper) */
 .dark {
-  --background: rgb(38, 38, 36);
-  --foreground: rgb(195, 192, 182);
-  --card: rgb(38, 38, 36);
-  --card-foreground: rgb(250, 249, 245);
-  --popover: rgb(48, 48, 46);
-  --popover-foreground: rgb(229, 229, 226);
-  --primary: rgb(217, 119, 87);
-  --primary-foreground: rgb(255, 255, 255);
-  --secondary: rgb(250, 249, 245);
-  --secondary-foreground: rgb(48, 48, 46);
-  --muted: rgb(27, 27, 25);
-  --muted-foreground: rgb(183, 181, 169);
-  --accent: rgb(26, 25, 21);
-  --accent-foreground: rgb(245, 244, 238);
-  --destructive: rgb(239, 68, 68);
+  --background: rgb(8, 8, 8);
+  --foreground: rgb(255, 255, 255);
+  --card: rgb(13, 13, 13);
+  --card-foreground: rgb(250, 250, 245);
+  --popover: rgb(16, 16, 16);
+  --popover-foreground: rgb(235, 235, 230);
+  --primary: rgb(212, 175, 55);
+  --primary-foreground: rgb(8, 8, 8);
+  --secondary: rgb(20, 20, 18);
+  --secondary-foreground: rgb(210, 210, 205);
+  --muted: rgb(18, 18, 16);
+  --muted-foreground: rgb(120, 120, 112);
+  --accent: rgb(20, 18, 12);
+  --accent-foreground: rgb(250, 245, 235);
+  --destructive: rgb(220, 50, 50);
   --destructive-foreground: rgb(255, 255, 255);
-  --border: rgb(62, 62, 56);
-  --input: rgb(82, 81, 74);
-  --ring: rgb(217, 119, 87);
-  --chart-1: rgb(176, 87, 48);
-  --chart-2: rgb(156, 135, 245);
-  --chart-3: rgb(26, 25, 21);
-  --chart-4: rgb(47, 43, 72);
-  --chart-5: rgb(180, 85, 45);
-  --sidebar: rgb(31, 30, 29);
-  --sidebar-foreground: rgb(195, 192, 182);
-  --sidebar-primary: rgb(52, 52, 52);
-  --sidebar-primary-foreground: rgb(251, 251, 251);
-  --sidebar-accent: rgb(15, 15, 14);
-  --sidebar-accent-foreground: rgb(195, 192, 182);
-  --sidebar-border: rgb(235, 235, 235);
-  --sidebar-ring: rgb(181, 181, 181);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.5rem;
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --border: rgb(30, 30, 27);
+  --input: rgb(30, 30, 27);
+  --ring: rgb(212, 175, 55);
+  --chart-1: rgb(212, 175, 55);
+  --chart-2: rgb(168, 140, 50);
+  --chart-3: rgb(255, 215, 100);
+  --chart-4: rgb(140, 115, 40);
+  --chart-5: rgb(180, 150, 60);
+  --sidebar: rgb(10, 10, 10);
+  --sidebar-foreground: rgb(200, 200, 195);
+  --sidebar-primary: rgb(212, 175, 55);
+  --sidebar-primary-foreground: rgb(8, 8, 8);
+  --sidebar-accent: rgb(14, 14, 12);
+  --sidebar-accent-foreground: rgb(200, 200, 195);
+  --sidebar-border: rgb(25, 25, 23);
+  --sidebar-ring: rgb(212, 175, 55);
 }
 
 @layer base {
   html {
-    @apply dark; /* default to dark */
+    @apply dark;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  /* Elegant heading treatment */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
 
@@ -160,23 +180,154 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-/* Custom, themed scrollbar utility */
+/* ========================================
+   CUSTOM SCROLLBAR (Luxury Dark)
+   ======================================== */
 .custom-scrollbar {
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--border) var(--card); /* thumb track */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--card);
 }
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--card);
+  background: transparent;
   border-radius: 8px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: rgba(212, 175, 55, 0.2);
   border-radius: 8px;
-  border: 2px solid var(--card);
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+  background: rgba(212, 175, 55, 0.4);
+}
+
+/* ========================================
+   TYPING ANIMATION DOTS
+   ======================================== */
+@keyframes typingPulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+.typing-dot:nth-child(1) { animation: typingPulse 1.4s infinite 0s; }
+.typing-dot:nth-child(2) { animation: typingPulse 1.4s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typingPulse 1.4s infinite 0.4s; }
+
+/* ========================================
+   LUMINA SLIDER STYLES
+   ======================================== */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.slider-wrapper.loaded {
+  opacity: 1;
+}
+.webgl-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide-number {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+  color: var(--color-text-light);
+  letter-spacing: 0.15em;
+  z-index: 10;
+}
+.slide-total {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+  color: var(--color-text-light);
+  letter-spacing: 0.15em;
+  z-index: 10;
+}
+.slide-content {
+  position: absolute;
+  bottom: 8rem;
+  left: 2rem;
+  z-index: 10;
+  max-width: 600px;
+}
+.slide-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  color: var(--color-text);
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+.slide-description {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  color: var(--color-text-muted);
+  font-weight: 300;
+  max-width: 400px;
+}
+.slides-navigation {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+.slide-nav-item {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+.slide-nav-item.active {
+  opacity: 1;
+}
+.slide-nav-item:hover {
+  opacity: 0.8;
+}
+.slide-progress-line {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.slide-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width 0.1s ease, opacity 0.3s ease;
+}
+.slide-nav-title {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono);
+  color: var(--color-text-light);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   GOLD GLOW UTILITY
+   ======================================== */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), 0 0 60px rgba(212, 175, 55, 0.05);
+}
+.gold-glow-text {
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
 }
