@@ -294,4 +294,4 @@ const GlassWaveOverlay = forwardRef(function GlassWaveOverlay(
 
 export default GlassWaveOverlay;
 export { GlassWaveOverlay };
-export type { GlassWaveHandle };
+// GlassWaveHandle is exported where it's declared (above). No extra export here to avoid duplicate export errors.
