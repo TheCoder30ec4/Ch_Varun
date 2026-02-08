@@ -1,5 +1,6 @@
+import { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LiquidGradient from './components/ui/flow-gradient-hero-section'
+const LiquidGradient = lazy(() => import('./components/ui/flow-gradient-hero-section'))
 import SiteLayout from './components/ui/demo'
 import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
@@ -12,8 +13,10 @@ import NotFound from './components/ui/not-found'
 function App() {
   return (
     <BrowserRouter>
-      {/* Persistent animated gradient background — fixed behind everything */}
-      <LiquidGradient asBackground />
+      {/* Persistent animated gradient background — lazy-loaded to reduce initial bundle */}
+      <Suspense fallback={null}>
+        <LiquidGradient asBackground />
+      </Suspense>
 
       {/* All page content sits on top of the gradient */}
       <div className="app-content-over-gradient">
