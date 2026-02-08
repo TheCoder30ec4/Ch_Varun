@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import this file in your app entry (e.g. main.tsx) or include it in your build pipeline. */

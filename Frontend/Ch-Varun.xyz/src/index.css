@@ -1,0 +1,610 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* =====================================================================
+   DESIGN SYSTEM — Ch Varun
+   Single source of truth for all tokens used across the site.
+   ===================================================================== */
+
+:root {
+  /* ── Typography: Font Families ── */
+  --font-mono:    "PPSupplyMono", monospace;
+  --font-sans:    "PP Neue Montreal", system-ui, -apple-system, sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-cursive: "Snell Roundhand", "Apple Chancery", "Segoe Script", "Dancing Script", cursive;
+
+  /* ── Typography: Font Sizes ── */
+  --text-xs:   clamp(10px, 1.2vw, 12px);    /* mono / nav labels          */
+  --text-sm:   clamp(12px, 1.4vw, 14px);    /* captions                   */
+  --text-base: clamp(14px, 1.6vw, 16px);    /* body                       */
+  --text-lg:   clamp(16px, 2vw, 20px);      /* subheadings                */
+  --text-xl:   clamp(20px, 3vw, 28px);      /* section headings           */
+  --text-2xl:  clamp(28px, 5vw, 40px);      /* large headings             */
+  --text-hero: clamp(2.5rem, 7vw, 5rem);    /* hero / display title       */
+
+  /* ── Typography: Font Weights ── */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ── Typography: Letter Spacing ── */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.12em;
+  --tracking-wider:   0.15em;
+
+  /* ── Typography: Line Height ── */
+  --leading-tight:  1.1;
+  --leading-snug:   1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* ── Colors: Background ── */
+  --color-bg:        #0a0a0a;
+  --color-bg-navy:   #0a0e27;
+
+  /* ── Colors: Text ── */
+  --color-text:       #ffffff;
+  --color-text-90:    rgba(255, 255, 255, 0.9);
+  --color-text-75:    rgba(255, 255, 255, 0.75);
+  --color-text-70:    rgba(255, 255, 255, 0.7);
+  --color-text-50:    rgba(255, 255, 255, 0.5);
+  --color-text-40:    rgba(255, 255, 255, 0.4);
+  --color-text-35:    rgba(255, 255, 255, 0.35);
+
+  /* ── Colors: Surfaces & Borders ── */
+  --color-surface-8:   rgba(255, 255, 255, 0.08);
+  --color-surface-15:  rgba(255, 255, 255, 0.15);
+  --color-surface-20:  rgba(255, 255, 255, 0.2);
+  --color-border:      rgba(255, 255, 255, 0.2);
+  --color-border-light: rgba(255, 255, 255, 0.15);
+  --color-border-hover: rgba(255, 255, 255, 0.4);
+  --color-line:        rgba(255, 255, 255, 0.08);
+
+  /* ── Colors: Accent ── */
+  --color-accent:      #d4af37;
+
+  /* ── Colors: Shadows ── */
+  --shadow-text:      0 1px 6px rgba(0, 0, 0, 0.4);
+  --shadow-text-heavy: 0 2px 30px rgba(0, 0, 0, 0.5);
+
+  /* ── Spacing Scale ── */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+
+  /* ── Z-Index Layers ── */
+  --z-bg:       0;
+  --z-content:  1;
+  --z-pong:     5;
+  --z-overlay:  10;
+  --z-pause:    20;
+  --z-nav:      30;
+  --z-cursor:   9999;
+
+  /* ── Transitions ── */
+  --ease-default:   0.3s ease;
+  --ease-fast:      0.2s ease;
+  --ease-slow:      0.5s ease;
+  --ease-transform: 0.35s ease;
+
+  /* ── Border Radius ── */
+  --radius-none:  0;
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-full:  50%;
+
+  /* ── Backdrop ── */
+  --blur-sm:  blur(4px);
+  --blur-md:  blur(8px);
+  --blur-lg:  blur(16px);
+}
+
+/* =====================================================================
+   RESET
+   ===================================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================================
+   GLOBAL TYPOGRAPHY HELPERS
+   ===================================================================== */
+.font-mono    { font-family: var(--font-mono); }
+.font-sans    { font-family: var(--font-sans); }
+.font-display { font-family: var(--font-display); }
+.font-cursive { font-family: var(--font-cursive); font-style: italic; }
+
+/* =====================================================================
+   Glass Wave Overlay
+   ===================================================================== */
+.glass-wave-demo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Pong game canvas — sits above gradient, below glass wave & nav */
+.pong-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-pong);
+}
+
+.glass-wave-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+/* =====================================================================
+   Bottom Navigation Bar
+   ===================================================================== */
+.bottom-nav {
+  position: absolute;
+  left: var(--space-8);
+  right: var(--space-8);
+  bottom: var(--space-4);
+  z-index: var(--z-nav);
+  display: flex;
+  gap: var(--space-4);
+  background: transparent;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-35);
+  padding: var(--space-4) var(--space-2) 1.4rem;
+  position: relative;
+  transition: color var(--ease-default);
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: var(--shadow-text);
+}
+
+/* Progress line — sits ABOVE each nav item */
+.bottom-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--color-line);
+}
+.bottom-nav-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--ease-transform);
+}
+
+.bottom-nav-item:hover {
+  color: var(--color-text-75);
+}
+.bottom-nav-item.active {
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+.bottom-nav-item.active::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 640px) {
+  .bottom-nav {
+    flex-wrap: wrap;
+  }
+  .bottom-nav-item {
+    flex: 1 1 33%;
+    padding: var(--space-3) var(--space-1) var(--space-4);
+  }
+}
+
+/* =====================================================================
+   Flow Gradient Background Component
+   ===================================================================== */
+
+/* Standard container (hero section mode) */
+.liquid-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+
+/* Background mode — fixed behind all content */
+.liquid-container--bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: auto;
+}
+
+/* Three.js canvas wrapper */
+.liquid-canvas-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.liquid-canvas-wrapper canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Custom cursor */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--color-border-hover);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: opacity 0.25s ease;
+  mix-blend-mode: difference;
+}
+.cursor-dot-element {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--color-text-90);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: opacity 0.25s ease;
+  mix-blend-mode: difference;
+}
+
+/* Overlay content (title + CTA) */
+.liquid-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  text-align: center;
+  padding: var(--space-8);
+}
+.liquid-title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  color: var(--color-text);
+  text-shadow: var(--shadow-text-heavy);
+  margin: 0 0 var(--space-6) 0;
+  line-height: var(--leading-tight);
+}
+.liquid-cta {
+  pointer-events: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  transition: background var(--ease-default), border-color var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+}
+.liquid-cta:hover {
+  background: var(--color-surface-15);
+  border-color: var(--color-border-hover);
+}
+
+/* Pause button */
+.liquid-pause {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-pause);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-70);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background var(--ease-default), color var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+}
+.liquid-pause:hover {
+  background: var(--color-surface-15);
+  color: var(--color-text);
+}
+
+/* Children layer — sits on top of the gradient when used as background */
+.liquid-children {
+  position: relative;
+  z-index: var(--z-overlay);
+  pointer-events: auto;
+}
+
+/* When gradient is used as background, ensure page content scrolls over it */
+.app-content-over-gradient {
+  position: relative;
+  z-index: var(--z-content);
+  min-height: 100vh;
+}
+
+/* =====================================================================
+   Page Content Panels (shared by all nav pages)
+   ===================================================================== */
+.page-panel {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-pong);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  pointer-events: none;
+}
+.page-panel > * {
+  pointer-events: auto;
+}
+
+/* =====================================================================
+   Chat with my Assistant
+   ===================================================================== */
+.chat-page {
+  gap: var(--space-6);
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.chat-page__title {
+  font-family: var(--font-cursive);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  text-shadow: var(--shadow-text-heavy);
+}
+
+.chat-page__subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  color: var(--color-text-50);
+  line-height: var(--leading-relaxed);
+  max-width: 480px;
+}
+
+.chat-page__input-wrap {
+  display: flex;
+  width: 100%;
+  max-width: 480px;
+  gap: var(--space-2);
+}
+
+.chat-page__input {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  outline: none;
+  transition: border-color var(--ease-default), background var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+}
+.chat-page__input::placeholder {
+  color: var(--color-text-35);
+}
+.chat-page__input:focus {
+  border-color: var(--color-border-hover);
+  background: var(--color-surface-15);
+}
+
+.chat-page__send {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-6);
+  cursor: pointer;
+  transition: background var(--ease-default), border-color var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+  white-space: nowrap;
+}
+.chat-page__send:hover {
+  background: var(--color-surface-15);
+  border-color: var(--color-border-hover);
+}
+
+.chat-page__hint {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-35);
+  letter-spacing: var(--tracking-wide);
+}
+
+@media (max-width: 640px) {
+  .chat-page {
+    padding: var(--space-4);
+  }
+  .chat-page__input-wrap {
+    flex-direction: column;
+  }
+}
+
+/* =====================================================================
+   Contact Me
+   ===================================================================== */
+.contact-page {
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.contact-page__lottie {
+  width: clamp(160px, 25vw, 240px);
+  height: clamp(160px, 25vw, 240px);
+}
+
+.contact-page__title {
+  font-family: var(--font-cursive);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  text-shadow: var(--shadow-text-heavy);
+}
+
+.contact-page__subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  color: var(--color-text-50);
+  line-height: var(--leading-relaxed);
+  max-width: 420px;
+}
+
+.contact-page__cta {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-8);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--ease-default), border-color var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+}
+.contact-page__cta:hover {
+  background: var(--color-surface-15);
+  border-color: var(--color-border-hover);
+}
+
+/* =====================================================================
+   Page Not Found / Coming Soon
+   ===================================================================== */
+.notfound-page {
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.notfound-page__lottie {
+  width: clamp(200px, 30vw, 320px);
+  height: clamp(200px, 30vw, 320px);
+}
+
+.notfound-page__title {
+  font-family: var(--font-cursive);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  text-shadow: var(--shadow-text-heavy);
+}
+
+.notfound-page__subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  color: var(--color-text-50);
+  line-height: var(--leading-relaxed);
+  max-width: 400px;
+}
+
+/* Full-page 404 (routed, not inside demo) */
+.notfound-fullpage {
+  position: relative;
+  z-index: var(--z-pong);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.notfound-page__btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-surface-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-8);
+  cursor: pointer;
+  transition: background var(--ease-default), border-color var(--ease-default);
+  backdrop-filter: var(--blur-sm);
+  margin-top: var(--space-4);
+}
+.notfound-page__btn:hover {
+  background: var(--color-surface-15);
+  border-color: var(--color-border-hover);
+}
